@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type topBarSliceFileType = {
     allFilesOnTopBar:string[],
-    activeFile: null | undefined | string
+    activeFile: null | undefined | string,
+    currentFullCode:string
 }
 
 const initialState:topBarSliceFileType = {
     allFilesOnTopBar:[],
     activeFile:null,
+    currentFullCode:""
 }
 
 const allFileSlice = createSlice({
@@ -31,10 +33,13 @@ const allFileSlice = createSlice({
             state.allFilesOnTopBar = state.allFilesOnTopBar.filter((fileName)=>{
                 return fileName!=action.payload
             })
+        },
+        updateCurrentFullCode(state,action){
+            state.currentFullCode = action.payload
         }
 
     }
 })
 
-export const {setActiveFile , setAllFilesOnTopBar , removeFileFromTopBar} = allFileSlice.actions
+export const {setActiveFile , setAllFilesOnTopBar , removeFileFromTopBar , updateCurrentFullCode} = allFileSlice.actions
 export default allFileSlice.reducer

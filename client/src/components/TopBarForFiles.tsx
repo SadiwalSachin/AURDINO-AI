@@ -22,7 +22,7 @@ const TopBarForFiles = () => {
     <div className="w-[100%] bg-zinc-700 h-10 text-white flex items-center">
       {allFilesOnTopBar.map((fileName:string, index:number) => (
         <div
-        key={index} className={`w-max p-3 border-r text-center h-[100%] flex items-center hover:bg-zinc-500 ${fileName==activeFile ? "bg-zinc-900" : ""} cursor-pointer `}>
+        key={index} className={`w-max p-3 border-r text-center h-[100%] flex items-center  ${fileName==activeFile ? "bg-zinc-900" : "hover:bg-zinc-500"} cursor-pointer `}>
           <h2
           onClick={()=>dispatch(setActiveFile(fileName))}
           >

@@ -13,11 +13,18 @@ const Sidebar = () => {
 
 
   const files = useSelector((state)=>state.fileSlice.allFiles)
+  const activeFile = useSelector((state)=>state.allFileSlice.activeFile)
+
 
   const handleAdd = (e) => {
     e.preventDefault()
     const languageType = fileName.split(".");
-    const language = languageType.length > 1 ? languageType.pop() : "";
+    let language = languageType.length > 1 ? languageType.pop() : "";
+    if(language == "js"){
+      language = "javascript"
+    } else if (language == "ts") {
+      language = "typescript"
+    }
     dispatch(
       createFile({
         fileName,
@@ -52,7 +59,7 @@ const Sidebar = () => {
           Add
         </button>
         </form>
-      <h3 className="text-lg font-semibold mt-4">📁 Files</h3>
+      <h3 className="text-lg font-semibold mt-4 py-2 border-b-2">📁 Files</h3>
 
       <ul className="mt-5 space-y-2">
         {
@@ -60,7 +67,7 @@ const Sidebar = () => {
             <li
             key={index}
             onClick={() => handleActiveFileAndTopBar(fileName)}
-            className="cursor-pointer p-2 rounded bg-[#2c2c2c] hover:bg-[#3a3a3a] transition"
+            className={`cursor-pointer p-2 rounded bg-[#2c2c2c] transition ${fileName==activeFile ? "bg-zinc-500" : "hover:bg-zinc-500"} `}
           >
             {fileName}
           </li>

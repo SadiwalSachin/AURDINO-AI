@@ -3,8 +3,15 @@ import { useSelector } from "react-redux";
 import TopBarForFiles from "./TopBarForFiles";
 import { updateFileContent } from "../../redux/slices/file.slice";
 import { useDispatch } from "react-redux";
+import ChatBot from "./ChatBot";
+import Terminal from "./Terminal";
+import { useState } from "react";
+import { TerminalIcon } from "lucide-react";
 
 const CodeEditor = () => {
+
+  const [showTerminal,setShowTerminal] = useState<boolean>(false)
+
   const file = useSelector(state=>state.fileSlice.allFiles)
   const activeFile = useSelector(state=>state.allFileSlice.activeFile)
   let content ;
@@ -16,10 +23,14 @@ const CodeEditor = () => {
   const handleChange = (value) => {
     dispatch(updateFileContent({"fileName":activeFile,"content":value}));
   };
-
+  
   return (
-    <div className="w-90vw border-l-2 border-slate-200  bg-[#1e1e1e]">
+    <div className="w-90vw border-l-2 border-slate-200  bg-[#1e1e1e] relative">
+      <div className="flex items-center bg-zinc-700 h-10">
       <TopBarForFiles/>
+      <TerminalIcon onClick={()=>setShowTerminal(true)} color="white" className="mr-4 cursor-pointer"/>
+      </div>
+
       <Editor
         height="93vh"
         width="100%"
@@ -35,6 +46,10 @@ const CodeEditor = () => {
         }}
         theme="vs-dark"
       />
+
+      <ChatBot/>
+
+      <Terminal showTerminal={showTerminal} setShowTerminal={setShowTerminal}/>
     </div>
   )
 }

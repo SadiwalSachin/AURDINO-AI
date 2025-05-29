@@ -16,7 +16,7 @@ function App() {
           />
         ) : (
           <div className="bg-zinc-800 h-screen flex flex-col items-center justify-center">
-            <h1 className="text-5xl font-semibold text-slate-300">Welcome to AURDINO-AI</h1>
+            <h1 className="text-5xl font-semibold text-slate-300">Welcome to ARDUINO-AI</h1>
             <h2 className="text-slate-300 text-3xl mt-6">
             📂 Open or add a file to start coding
             </h2>
